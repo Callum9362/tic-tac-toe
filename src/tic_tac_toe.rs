@@ -11,7 +11,9 @@ impl TicTacToe {
 
     pub fn display_board(&self) {
         for row in &self.board {
-            println!("{}", row.iter().map(|c| c.to_string()).collect::<Vec<_>>().join(" | "));
+            println!("{}", row.iter().map(
+                |c| c.to_string()).collect::<Vec<_>>().join(" | ")
+            );
         }
         println!("---------");
     }
@@ -27,18 +29,21 @@ impl TicTacToe {
 
     pub fn check_winner(&self, player: char) -> bool {
         for i in 0..3 {
-            if self.board[i].iter().all(|&c| c == player) || (0..3).all(|j| self.board[j][i] == player) {
+            if self.board[i].iter().all(|&c| c == player)
+                || (0..3).all(|j| self.board[j][i] == player) {
                 return true;
             }
         }
-        if (0..3).all(|i| self.board[i][i] == player) || (0..3).all(|i| self.board[i][2 - i] == player) {
+        if (0..3).all(|i| self.board[i][i] == player)
+            || (0..3).all(|i| self.board[i][2 - i] == player) {
             return true;
         }
         false
     }
 
     pub fn is_tie(&self) -> bool {
-        self.board.iter().all(|row| row.iter().all(|&c| c != ' ')) && !self.check_winner('X') && !self.check_winner('O')
+        self.board.iter().all(|row| row.iter().all(|&c| c != ' '))
+            && !self.check_winner('X') && !self.check_winner('O')
     }
 }
 
